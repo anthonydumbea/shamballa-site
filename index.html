@@ -163,7 +163,7 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     border-radius: var(--radius);
-    transition: all .3s ease;
+    transition: all .2s ease;
     border: 1px solid var(--bois-fonce);
   }
   .btn-primary{
@@ -224,7 +224,7 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 3s ease !important;
+    transition: opacity 2s ease !important;
   }
   .carousel .carousel-slide.active{ opacity: 1; z-index: 1; }
   .carousel-dots{
@@ -242,7 +242,7 @@
     border: 1px solid rgba(58,47,34,.4);
     padding:0;
     cursor:pointer;
-    transition: background .3s ease;
+    transition: background .2s ease;
   }
   .carousel-dot.active{ background:#fff; }
   .frame-inner img{
@@ -348,6 +348,83 @@
     display:grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+  }
+  .gallery .frame{ cursor: pointer; }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position: fixed;
+    inset: 0;
+    background: rgba(58,47,34,0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 40px 20px;
+  }
+  .lightbox.open{ display: flex; }
+  .lightbox-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+  }
+  .lightbox-img-wrap{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-img-wrap img{
+    max-width: 100%;
+    max-height: 72vh;
+    border-radius: 3px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .lightbox-caption{
+    margin-top: 18px;
+    color: var(--creme);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: 700px;
+    letter-spacing: .3px;
+  }
+  .lightbox-close{
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none;
+    border: none;
+    color: var(--creme);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .lightbox-prev, .lightbox-next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(246,241,231,0.15);
+    border: 1px solid rgba(246,241,231,0.4);
+    color: var(--creme);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s ease;
+  }
+  .lightbox-prev:hover, .lightbox-next:hover{ background: rgba(246,241,231,0.3); }
+  .lightbox-prev{ left: -10px; }
+  .lightbox-next{ right: -10px; }
+  @media (max-width: 640px){
+    .lightbox-prev{ left: 4px; }
+    .lightbox-next{ right: 4px; }
   }
 
   /* ---------- CONTACT ---------- */
@@ -588,6 +665,18 @@
       <div class="frame"><div class="frame-inner"><img src="images/roulotte-12.jpg" alt="Intérieur roulotte : décor en bois sculpté et coin repas" loading="lazy"></div></div>
       <div class="frame"><div class="frame-inner"><img src="images/roulotte-08.jpg" alt="Illustration artistique d'une roulotte Shamballa Constructions" loading="lazy"></div></div>
     </div>
+
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">&times;</button>
+      <div class="lightbox-content">
+        <div class="lightbox-img-wrap">
+          <button class="lightbox-prev" id="lightboxPrev" aria-label="Photo précédente">&#8249;</button>
+          <img id="lightboxImg" src="" alt="">
+          <button class="lightbox-next" id="lightboxNext" aria-label="Photo suivante">&#8250;</button>
+        </div>
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -605,7 +694,6 @@
         </div>
         <div>
           <div class="label">Appelez-nous</div>
-          <div style="font-weight:600;color:var(--bois-fonce);margin-bottom:2px;">David Calabretto</div>
           <a class="value" href="tel:+33782097455">(+33) 7.82.09.74.55</a>
         </div>
       </div>
@@ -673,13 +761,61 @@
       dots[idx].classList.add('active');
     }
 
-    let timer = setInterval(() => goTo((idx + 1) % slides.length), 4000);
+    let timer = setInterval(() => goTo((idx + 1) % slides.length), 5000);
     carouselEl.addEventListener('mouseenter', () => clearInterval(timer));
     carouselEl.addEventListener('mouseleave', () => {
-      timer = setInterval(() => goTo((idx + 1) % slides.length), 4000);
+      timer = setInterval(() => goTo((idx + 1) % slides.length), 5000);
     });
   }
   document.querySelectorAll('.carousel').forEach(initCarousel);
+
+  // Lightbox galerie réalisations
+  (function(){
+    const galleryImgs = Array.from(document.querySelectorAll('#gallery .frame img'));
+    if(!galleryImgs.length) return;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+    let current = 0;
+
+    function show(i){
+      current = (i + galleryImgs.length) % galleryImgs.length;
+      const img = galleryImgs[current];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = img.alt;
+    }
+
+    function openLightbox(i){
+      show(i);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    galleryImgs.forEach((img, i) => {
+      img.closest('.frame').addEventListener('click', () => openLightbox(i));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', () => show(current - 1));
+    nextBtn.addEventListener('click', () => show(current + 1));
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') show(current - 1);
+      if(e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
 </script>
 
 </body>
