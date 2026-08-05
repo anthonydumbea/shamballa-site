@@ -356,13 +356,16 @@
     position: fixed;
     inset: 0;
     background: rgba(58,47,34,0.94);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 40px 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms linear, visibility 1s;
   }
-  .lightbox.open{ display: flex; }
+  .lightbox.open{ opacity: 1; visibility: visible; }
   .lightbox-content{
     display: flex;
     flex-direction: column;
@@ -382,6 +385,7 @@
     max-height: 72vh;
     border-radius: 3px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    transition: opacity 0.2s ease;
   }
   .lightbox-caption{
     margin-top: 18px;
@@ -784,9 +788,13 @@
     function show(i){
       current = (i + galleryImgs.length) % galleryImgs.length;
       const img = galleryImgs[current];
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightboxCaption.textContent = img.alt;
+      lightboxImg.style.opacity = '0';
+      setTimeout(() => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = img.alt;
+        lightboxImg.style.opacity = '1';
+      }, 200);
     }
 
     function openLightbox(i){
