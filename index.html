@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shamballa Constructions | Habitats & réalisations sur mesure</title>
+<meta name="description" content="Shamballa Constructions — Tiny houses, roulottes, chalets et dômes faits main. Habitats artisanaux et sur mesure, proches de la nature.">
+
+<style>
+  :root{
+    --bois-fonce: #3a2f22;
+    --bois: #7c5a3a;
+    --bois-clair: #a9835c;
+    --creme: #f6f1e7;
+    --creme-fonce: #ece3d2;
+    --vert: #6b7b52;
+    --texte: #362c22;
+    --radius: 6px;
+    --ombre: 0 10px 30px rgba(58,47,34,0.12);
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--texte);
+    background: var(--creme);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3{
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    color: var(--bois-fonce);
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  img{ max-width:100%; display:block; }
+
+  .container{
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position: sticky;
+    top:0;
+    z-index: 100;
+    background: rgba(246,241,231,0.96);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--creme-fonce);
+  }
+
+  .nav-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 16px 24px;
+    max-width: 1160px;
+    margin:0 auto;
+  }
+
+  .logo{
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: var(--bois-fonce);
+  }
+  .logo span{ color: var(--vert); }
+
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap: 32px;
+  }
+
+  nav ul li a{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--bois-fonce);
+    padding: 6px 2px;
+    border-bottom: 2px solid transparent;
+    transition: border-color .2s ease;
+  }
+  nav ul li a:hover{ border-color: var(--vert); }
+
+  .burger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding: 6px;
+  }
+  .burger span{
+    width: 26px;
+    height: 2px;
+    background: var(--bois-fonce);
+    display:block;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 70px 0 90px;
+    background: linear-gradient(180deg, var(--creme) 0%, var(--creme-fonce) 100%);
+  }
+
+  .hero-inner{
+    display:flex;
+    align-items:center;
+    gap: 60px;
+  }
+
+  .hero-text{ flex: 1 1 480px; }
+  .hero-text .eyebrow{
+    font-family: Verdana, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    color: var(--vert);
+    margin-bottom: 14px;
+    display:block;
+  }
+  .hero-text h1{
+    font-size: 2.6rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .hero-text p{
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+
+  .cta-row{
+    display:flex;
+    gap:16px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  .btn{
+    display:inline-block;
+    padding: 13px 28px;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: var(--radius);
+    transition: all .2s ease;
+    border: 1px solid var(--bois-fonce);
+  }
+  .btn-primary{
+    background: var(--bois-fonce);
+    color: var(--creme);
+  }
+  .btn-primary:hover{ background: var(--vert); border-color: var(--vert); }
+  .btn-outline{
+    background: transparent;
+    color: var(--bois-fonce);
+  }
+  .btn-outline:hover{ background: var(--bois-fonce); color: var(--creme); }
+
+  .hero-photo{ flex: 1 1 420px; }
+
+  /* ---------- PHOTO FRAMES (placeholders) ---------- */
+  /*
+    Emplacement pour vos photos.
+    Pour insérer une vraie photo : ajoutez une image dans le dossier "images/"
+    puis remplacez le contenu de la balise <div class="frame"> par :
+    <img src="images/votre-photo.jpg" alt="...">
+    (retirez alors la classe "frame-empty" et le contenu placeholder)
+  */
+  .frame{
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid var(--bois-clair);
+    border-radius: 3px;
+    box-shadow: var(--ombre);
+  }
+  .frame-inner{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background:
+      repeating-linear-gradient(45deg, #eee2ce, #eee2ce 10px, #e6d9c1 10px, #e6d9c1 20px);
+    border: 1px dashed var(--bois-clair);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .frame-inner .icon{
+    width: 40px; height:40px;
+    opacity:.55;
+    margin-bottom:8px;
+  }
+  .carousel{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .carousel .carousel-slide{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease !important;
+  }
+  .carousel .carousel-slide.active{ opacity: 1; z-index: 1; }
+  .carousel-dots{
+    position: absolute;
+    bottom: 12px; left:0; right:0;
+    display:flex;
+    justify-content:center;
+    gap: 7px;
+    z-index: 2;
+  }
+  .carousel-dot{
+    width: 8px; height:8px;
+    border-radius:50%;
+    background: rgba(255,255,255,.5);
+    border: 1px solid rgba(58,47,34,.4);
+    padding:0;
+    cursor:pointer;
+    transition: background .2s ease;
+  }
+  .carousel-dot.active{ background:#fff; }
+  .frame-inner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;
+    transition: transform .5s ease;
+  }
+  .frame:hover .frame-inner img{
+    transform: scale(1.06);
+  }
+  .frame-label{
+    text-align:center;
+    color: var(--bois);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .frame-caption{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 6px;
+  }
+
+  /* ---------- SECTION COMMON ---------- */
+  section{ padding: 90px 0; }
+  .section-head{
+    text-align:center;
+    max-width: 640px;
+    margin: 0 auto 50px;
+  }
+  .section-head .eyebrow{
+    font-family: Verdana, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    color: var(--vert);
+    display:block;
+    margin-bottom: 12px;
+  }
+  .section-head h2{ font-size: 2.1rem; margin-bottom: 14px; }
+  .section-head p{ color: #5c5040; }
+
+  /* ---------- PRESENTATION ---------- */
+  #presentation{ background: #fff; }
+
+  .split{
+    display:flex;
+    align-items:center;
+    gap: 60px;
+    margin-bottom: 90px;
+  }
+  .split:last-child{ margin-bottom:0; }
+  .split.reverse{ flex-direction: row-reverse; }
+  .split-text{ flex: 1 1 420px; }
+  .split-photo{ flex: 1 1 420px; }
+  .split-text h3{ font-size: 1.6rem; margin-bottom: 18px; }
+  .split-text p{ margin-bottom: 14px; color: #4a3f31; }
+
+  .savoir-list{
+    list-style:none;
+    margin-top: 20px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+  }
+  .savoir-list li{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.85rem;
+    padding-left: 22px;
+    position: relative;
+    color: #4a3f31;
+  }
+  .savoir-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top:7px;
+    width:8px; height:8px;
+    background: var(--vert);
+    border-radius:50%;
+  }
+
+  .visit-note{
+    margin-top: 40px;
+    background: var(--creme);
+    border-left: 3px solid var(--vert);
+    padding: 20px 26px;
+    border-radius: var(--radius);
+    font-style: italic;
+    color: #4a3f31;
+  }
+
+  /* ---------- REALISATIONS ---------- */
+  #realisations{ background: var(--creme-fonce); }
+
+  .gallery{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact{ background: #fff; }
+
+  .contact-wrap{
+    display:flex;
+    gap: 60px;
+    align-items:flex-start;
+  }
+
+  .contact-info{ flex: 1 1 380px; }
+  .contact-info h3{ font-size: 1.5rem; margin-bottom: 18px; }
+  .contact-info > p{ color:#4a3f31; margin-bottom: 30px; }
+
+  .contact-card{
+    display:flex;
+    gap: 16px;
+    align-items:flex-start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--creme-fonce);
+  }
+  .contact-card:last-child{ border-bottom:none; }
+  .contact-card .ic{
+    flex: 0 0 42px;
+    width: 42px; height:42px;
+    border-radius: 50%;
+    background: var(--creme);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--vert);
+  }
+  .contact-card .label{
+    font-family: Verdana, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: var(--bois-clair);
+    margin-bottom: 4px;
+  }
+  .contact-card .value{
+    font-size: 1.05rem;
+    color: var(--bois-fonce);
+  }
+  .contact-card a.value:hover{ color: var(--vert); }
+
+  .contact-photo{ flex: 1 1 380px; }
+
+  footer{
+    background: var(--bois-fonce);
+    color: var(--creme);
+    padding: 40px 0;
+    text-align:center;
+  }
+  footer .logo{ color: var(--creme); margin-bottom: 10px; }
+  footer .logo span{ color: #b7c79a; }
+  footer p{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.78rem;
+    color: #cfc4b0;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .gallery{ grid-template-columns: repeat(3, 1fr); }
+    .hero-inner, .split, .split.reverse, .contact-wrap{
+      flex-direction: column;
+    }
+    .split.reverse{ flex-direction: column; }
+    .hero-text, .hero-photo, .split-text, .split-photo, .contact-info, .contact-photo{
+      flex: 1 1 auto;
+      width: 100%;
+    }
+    .hero-text p{ max-width: none; }
+  }
+
+  @media (max-width: 640px){
+    nav ul{
+      position:absolute;
+      top: 100%; left:0; right:0;
+      background: var(--creme);
+      flex-direction: column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition: max-height .3s ease;
+      border-bottom: 1px solid var(--creme-fonce);
+    }
+    nav ul.open{ max-height: 260px; }
+    nav ul li{ border-top: 1px solid var(--creme-fonce); }
+    nav ul li a{
+      display:block;
+      padding: 16px 24px;
+    }
+    .burger{ display:flex; }
+    .hero-text h1{ font-size: 2rem; }
+    section{ padding: 60px 0; }
+    .gallery{ grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .savoir-list{ grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 420px){
+    .gallery{ grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#accueil" class="logo">Shamballa <span>Constructions</span></a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#presentation">Présentation</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="accueil">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Habitats & réalisations sur mesure</span>
+      <h1>Bienvenue chez Shamballa Constructions</h1>
+      <p>Des habitats uniques, pensés pour une vie libre, proche de la nature et à votre image.</p>
+      <p>Tiny houses, roulottes, chalets ou dômes — chaque création est une pièce artisanale façonnée à la main, avec passion et respect des matériaux.</p>
+      <p>Chez Shamballa Constructions, nous croyons qu'habiter, c'est avant tout se reconnecter à l'essentiel : un espace simple, beau et durable, qui respire avec vous.</p>
+      <div class="cta-row">
+        <a href="#realisations" class="btn btn-primary">Voir nos réalisations</a>
+        <a href="#contact" class="btn btn-outline">Nous contacter</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="frame">
+        <div class="frame-inner">
+          <div class="carousel" id="heroCarousel">
+            <img class="carousel-slide active" src="images/roulotte-01.jpg" alt="Roulotte Shamballa en cours de livraison, vue panoramique sur la campagne" loading="eager">
+            <img class="carousel-slide" src="images/roulotte-09.jpg" alt="Roulotte en bois avec auvent, installée dans un verger" loading="lazy">
+            <img class="carousel-slide" src="images/roulotte-10.jpg" alt="Roulotte en bois nichée dans la nature, ambiance chaleureuse" loading="lazy">
+            <img class="carousel-slide" src="images/roulotte-03.jpg" alt="Roulotte en bois sous les arbres, finition naturelle" loading="lazy">
+            <img class="carousel-slide" src="images/roulotte-02.jpg" alt="Roulotte en bois avec hublot rond et bois de chauffage empilé" loading="lazy">
+            <img class="carousel-slide" src="images/roulotte-04.jpg" alt="Dôme en bois Shamballa Constructions, vue extérieure" loading="lazy">
+            <img class="carousel-slide" src="images/roulotte-08.jpg" alt="Illustration artistique d'une roulotte Shamballa Constructions" loading="lazy">
+            <div class="carousel-dots"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRESENTATION ================= -->
+<section id="presentation">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Qui sommes-nous</span>
+      <h2>L'esprit Shamballa</h2>
+    </div>
+
+    <div class="split">
+      <div class="split-text">
+        <h3>Construire autrement</h3>
+        <p>Shamballa Constructions est née d'une envie : construire autrement.</p>
+        <p>Nos habitats sont le fruit d'un savoir-faire artisanal allié à une vision écologique et humaine de l'habitat.</p>
+        <p>Chaque projet est une aventure partagée, une création sur mesure conçue pour s'intégrer harmonieusement à son environnement et à votre mode de vie.</p>
+        <p>Nous travaillons le bois et les matériaux naturels avec soin, en privilégiant les circuits courts et les ressources locales. Notre démarche est simple : créer des espaces qui ont une âme.</p>
+      </div>
+      <div class="split-photo">
+        <div class="frame">
+          <div class="frame-inner">
+            <img src="images/roulotte-02.jpg" alt="Roulotte en bois dans la forêt, bois de chauffage empilé et échelle d'accès" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split reverse">
+      <div class="split-text">
+        <h3>Notre savoir-faire</h3>
+        <p>Des habitats faits main, avec le cœur. De l'esquisse aux dernières finitions, chaque détail compte.</p>
+        <p>Notre atelier réalise :</p>
+        <ul class="savoir-list">
+          <li>Tiny Houses</li>
+          <li>Roulottes — livraison sur toute la France et à l'étranger</li>
+          <li>Chalets — réalisation locale</li>
+          <li>Dômes — réalisation locale</li>
+        </ul>
+        <p style="margin-top:20px;">Nos réalisations sont entièrement personnalisables : design, matériaux, agencement, autonomie énergétique… tout est pensé pour s'adapter à vos besoins et à vos rêves.</p>
+        <p>Chaque habitat que nous construisons reflète notre exigence de qualité, notre amour du bois et notre engagement pour des habitats durables et inspirants.</p>
+      </div>
+      <div class="split-photo">
+        <div class="frame">
+          <div class="frame-inner">
+            <div class="carousel" id="interiorCarousel">
+              <img class="carousel-slide active" src="images/roulotte-05.jpg" alt="Intérieur roulotte : cuisine en bois avec hublot central" loading="lazy">
+              <img class="carousel-slide" src="images/roulotte-06.jpg" alt="Intérieur du dôme : cuisine et charpente en bois apparente" loading="lazy">
+              <img class="carousel-slide" src="images/roulotte-07.jpg" alt="Intérieur roulotte : banquette et rangements sur mesure" loading="lazy">
+              <img class="carousel-slide" src="images/roulotte-11.jpg" alt="Intérieur roulotte : coin nuit avec penderie intégrée" loading="lazy">
+              <img class="carousel-slide" src="images/roulotte-12.jpg" alt="Intérieur roulotte : décor en bois sculpté et coin repas" loading="lazy">
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="visit-note">
+      Vous pouvez nous rencontrer et visiter notre atelier. Nous serons heureux de vous accueillir et de vous présenter notre travail !
+    </div>
+  </div>
+</section>
+
+<!-- ================= REALISATIONS ================= -->
+<section id="realisations">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Nos réalisations</h2>
+      <p>Un aperçu de nos créations — tiny houses, roulottes, chalets et dômes façonnés à la main.</p>
+    </div>
+
+    <div class="gallery" id="gallery">
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-01.jpg" alt="Roulotte Shamballa en cours de livraison, vue panoramique sur la campagne" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-09.jpg" alt="Roulotte en bois avec auvent, installée dans un verger" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-03.jpg" alt="Roulotte en bois sous les arbres, finition naturelle" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-02.jpg" alt="Roulotte en bois avec hublot rond et bois de chauffage empilé" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-04.jpg" alt="Dôme en bois Shamballa Constructions, vue extérieure" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-10.jpg" alt="Roulotte en bois nichée dans la nature, ambiance chaleureuse" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-05.jpg" alt="Intérieur roulotte : cuisine en bois avec hublot central" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-06.jpg" alt="Intérieur du dôme : cuisine et charpente en bois apparente" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-07.jpg" alt="Intérieur roulotte : banquette et rangements sur mesure" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-11.jpg" alt="Intérieur roulotte : coin nuit avec penderie intégrée" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-12.jpg" alt="Intérieur roulotte : décor en bois sculpté et coin repas" loading="lazy"></div></div>
+      <div class="frame"><div class="frame-inner"><img src="images/roulotte-08.jpg" alt="Illustration artistique d'une roulotte Shamballa Constructions" loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="container contact-wrap">
+    <div class="contact-info">
+      <span class="eyebrow" style="font-family:Verdana,Arial,sans-serif;text-transform:uppercase;letter-spacing:3px;font-size:.75rem;color:var(--vert);display:block;margin-bottom:12px;">Nous rencontrer</span>
+      <h3>Contact</h3>
+      <p>Une question, un projet ? Contactez-nous ou venez visiter notre atelier.</p>
+
+      <div class="contact-card">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2.1z"/></svg>
+        </div>
+        <div>
+          <div class="label">Appelez-nous</div>
+          <a class="value" href="tel:+33782097455">(+33) 7.82.09.74.55</a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M3 6.5l9 6 9-6"/></svg>
+        </div>
+        <div>
+          <div class="label">Email</div>
+          <a class="value" href="mailto:shamballa.constructions@gmail.com">shamballa.constructions@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-photo">
+      <div class="frame">
+        <div class="frame-inner">
+          <img src="images/roulotte-10.jpg" alt="Roulotte Shamballa Constructions nichée dans la nature, ambiance chaleureuse" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="logo">Shamballa <span>Constructions</span></div>
+    <p>(+33) 7.82.09.74.55 &nbsp;•&nbsp; shamballa.constructions@gmail.com</p>
+    <p style="margin-top:8px;">&copy; <span id="year"></span> Shamballa Constructions — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile
+  const burger = document.getElementById('burger');
+  const navList = document.getElementById('navList');
+  burger.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  // Année du footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Diaporamas (cadre extérieur + cadre intérieur)
+  function initCarousel(carouselEl){
+    const slides = Array.from(carouselEl.querySelectorAll('.carousel-slide'));
+    const dotsWrap = carouselEl.querySelector('.carousel-dots');
+    if(!slides.length) return;
+    let idx = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Aller à la photo ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+
+    function goTo(i){
+      slides[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = i;
+      slides[idx].classList.add('active');
+      dots[idx].classList.add('active');
+    }
+
+    let timer = setInterval(() => goTo((idx + 1) % slides.length), 3000);
+    carouselEl.addEventListener('mouseenter', () => clearInterval(timer));
+    carouselEl.addEventListener('mouseleave', () => {
+      timer = setInterval(() => goTo((idx + 1) % slides.length), 3000);
+    });
+  }
+  document.querySelectorAll('.carousel').forEach(initCarousel);
+</script>
+
+</body>
+</html>
