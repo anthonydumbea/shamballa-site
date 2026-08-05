@@ -71,8 +71,15 @@
     font-size: 1.4rem;
     letter-spacing: 1px;
     color: var(--bois-fonce);
+    display: flex;
+    align-items: center;
   }
   .logo span{ color: var(--vert); }
+  .logo-img{
+    height: 66px;
+    width: auto;
+    display: block;
+  }
 
   nav ul{
     list-style:none;
@@ -450,7 +457,7 @@
 
 <header>
   <div class="nav-wrap">
-    <a href="#accueil" class="logo">Shamballa <span>Constructions</span></a>
+    <a href="#accueil" class="logo"><img src="images/logo.png" alt="Shamballa Constructions" class="logo-img"></a>
     <button class="burger" id="burger" aria-label="Ouvrir le menu">
       <span></span><span></span><span></span>
     </button>
@@ -598,6 +605,7 @@
         </div>
         <div>
           <div class="label">Appelez-nous</div>
+          <div style="font-weight:600;color:var(--bois-fonce);margin-bottom:2px;">David Calabretto</div>
           <a class="value" href="tel:+33782097455">(+33) 7.82.09.74.55</a>
         </div>
       </div>
